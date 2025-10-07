@@ -62,4 +62,15 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/listar", async (req, res) => {
+  try {
+    
+    //buscando usuário no banco
+    const user = await prisma.user.findMany()
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).json({ message: "Erro no Servidor, tente novamente, LOGIN" });
+  }
+});
+
 export default router;
