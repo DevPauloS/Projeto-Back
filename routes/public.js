@@ -23,7 +23,7 @@ router.post("/cadastro", async (req, res) => {
     });
     res.status(201).json(userDB);
   } catch (error) {
-    res.status(500).json({ message: "Erro no Servidor, tente novamente" });
+    res.status(500).json({ message: "Erro no Servidor, tente novamente, CADASTRO" });
   }
 });
 
@@ -58,7 +58,7 @@ router.post("/login", async (req, res) => {
 
     res.status(200).json(token)
   } catch (error) {
-    res.status(500).json({ message: "Erro no Servidor, tente novamente" });
+    res.status(500).json({ message: "Erro no Servidor, tente novamente, LOGIN" });
   }
 });
 

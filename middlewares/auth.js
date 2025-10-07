@@ -6,7 +6,7 @@ const auth = (req, res, next) => {
     const token = req.headers.authorization
     
     if(!token){
-        res.status(500).json({message: 'ERRO Grande'})
+        res.status(500).json({message: 'ERRO Grande/ AUTO'})
     }
 
     try {
