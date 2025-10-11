@@ -7,7 +7,7 @@ import cors from 'cors';
 
 const app = express();
 app.use(express.json())
-app.use(cors('https://tiny-jelly-49aee3.netlify.app'))
+app.use(cors())
 
 
 const port = process.env.port || 3001;
