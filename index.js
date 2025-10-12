@@ -7,11 +7,16 @@ import cors from 'cors';
 
 const app = express();
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: ["https://tiny-jelly-49aee3.netlify.app/"], // ou "*" pra testes
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
+}));
 
 
-const port = process.env.port || 3001;
+// const port = process.env.port || 3001;
 
 app.use('/', publicRoutes)
+// app.use('/', auth, privateRoutes)
 
 app.listen(3000, () => console.log("Servidor rodando!!"))
