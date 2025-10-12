@@ -53,7 +53,6 @@ router.post("/login", async (req, res) => {
     //gerando token // 1° payload, secret, options
     const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1d" });
 
-    localStorage.setItem(token);
     res.status(200).json(token);
   } catch (error) {
     res.status(500).json({ message: "Erro no Servidor, tente novamente" });
