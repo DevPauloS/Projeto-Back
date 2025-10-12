@@ -1,30 +1,21 @@
-import express from 'express'
-import publicRoutes from './routes/public.js'
-// import privateRoutes from './routes/private.js'
-// import auth from './middlewares/auth.js'
-import cors from 'cors';
+import { PrismaClient } from "@prisma/client";
+import cors from "cors";
 
+const prisma = new PrismaClient();
 
-const app = express();
-app.use(express.json())
-app.use(cors({
-  origin: ["https://tiny-jelly-49aee3.netlify.app"], // ou "*" pra testes
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true
-}));
+export default async function handler(req, res) {
+  cors(res);
+  if (req.method === "OPTIONS") return res.status(200).end();
 
-router.get("/listar-usuarios", async (req, res) => {
-  try {
-    const user = await prisma.user.findMany();
-
-     res.status(200).json({ message: "Usuários listados com sucesso", user });
-  } catch (error) {
-     res.status(500).json({ message: "Falha no servidor, LISTAR"});
+  if (req.method === "GET") {
+    try {
+      const users = await prisma.user.findMany();
+      return res.status(200).json(users);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Erro ao listar usuários" });
+    }
   }
-});
-// const port = process.env.port || 3001;
 
-// app.use('/', publicRoutes)
-// app.use('/', auth, privateRoutes)
-
-app.listen(3000, () => console.log("Servidor rodando!!"))
+  return res.status(405).json({ message: "Método não permitido" });
+}
