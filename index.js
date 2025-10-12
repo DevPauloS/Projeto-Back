@@ -1,21 +1,31 @@
-import { PrismaClient } from "@prisma/client";
-import cors from "cors";
+import express from 'express'
+import publicRoutes from './routes/public.js'
+import privateRoutes from './routes/private.js'
+import auth from './middlewares/auth.js'
+import cors from 'cors'
 
-const prisma = new PrismaClient();
 
-export default async function handler(req, res) {
-  cors(res);
-  if (req.method === "OPTIONS") return res.status(200).end();
+const app = express();
+app.use(express.json())
+app.use(cors('*'))
 
-  if (req.method === "GET") {
-    try {
-      const users = await prisma.user.findMany();
-      return res.status(200).json(users);
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ message: "Erro ao listar usuários" });
-    }
-  }
+app.use('/', publicRoutes)
+app.use('/', auth, privateRoutes)
+/*
 
-  return res.status(405).json({ message: "Método não permitido" });
-}
+cadastrar 
+
+login 
+
+listar
+*/
+
+
+
+
+
+
+
+
+
+app.listen(3000, () => console.log("Servidor rodando!!"))

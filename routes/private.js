@@ -1,18 +1,18 @@
-// import express, { Router } from 'express'
-// import {PrismaClient} from '@prisma/client'
+import express, { Router } from 'express'
+import {PrismaClient} from '@prisma/client'
 
 
-// const router = express.Router()
-// const prisma = new PrismaClient()
+const router = express.Router()
+const prisma = new PrismaClient()
 
-// router.get('/listar-usuarios', async (req, res) => {
-//     try {
-//         const user = await prisma.user.findMany()
+router.get('/listar-usuarios', async (req, res) => {
+    try {
+        const user = await prisma.user.findMany()
 
-//         res.status(200).json({message: 'Usuários listados com sucesso', user})
-//     } catch (error) {
-//         res.status(500).json({message: 'Falha no servidor, AUTH/LISTAR'})
-//     }
-// })
+        res.status(200).json({message: 'Usuários listados com sucesso', user})
+    } catch (error) {
+        res.status(500).json({message: 'Falha no servidor'})
+    }
+})
 
-// export default router
+export default router
