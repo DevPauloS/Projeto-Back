@@ -7,7 +7,7 @@ import cors from 'cors'
 
 const app = express();
 app.use(express.json())
-app.use(cors('https://paulosf21.netlify.app'))
+// app.use(cors('https://paulosf21.netlify.app'))
 
 app.use('/', publicRoutes)
 app.use('/', auth, privateRoutes)
