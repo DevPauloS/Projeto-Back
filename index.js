@@ -6,7 +6,7 @@ import cors from 'cors'
 
 
 const corsOptions = {
-  origin: 'https://paulosf2.netlify.app'
+  origin: 'https://paulosf.netlify.app'
 };
 
 const app = express();
