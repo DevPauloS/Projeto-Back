@@ -5,9 +5,13 @@ import auth from './middlewares/auth.js'
 import cors from 'cors'
 
 
+const corsOptions = {
+  origin: 'https://paulosf2.netlify.app'
+};
+
 const app = express();
 app.use(express.json())
-app.use(cors("https://paulosf2.netlify.app"))
+app.use(cors(corsOptions))
 
 app.use('/', publicRoutes)
 app.use('/', auth, privateRoutes)
