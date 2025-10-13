@@ -51,7 +51,7 @@ router.post("/login", async (req, res) => {
     }
 
     //gerando token // 1° payload, secret, options
-    const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1d" });
+    const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1m" });
 
     localStorage.setItem(token);
     res.status(200).json(token);
