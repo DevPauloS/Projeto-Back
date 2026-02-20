@@ -6,7 +6,21 @@ const prisma = new PrismaClient();
 
 router.get("/listar-usuarios", async (req, res) => {
   try {
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findMany();
+    res
+      .status(200)
+      .json({ message: "Usuários listados com sucesso", user: user});
+  } catch (error) {
+    res.status(500).json({ message: "Falha no servidor" });
+  }
+});
+
+router.post("/listar-usuario", async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: req.user.email
+      },
       select: {
         id: true,
         name: true,
@@ -15,7 +29,7 @@ router.get("/listar-usuarios", async (req, res) => {
     });
     res
       .status(200)
-      .json({ message: "Usuários listados com sucesso", user: user});
+      .json({ message: "Usuário listado com sucesso", user: user});
   } catch (error) {
     res.status(500).json({ message: "Falha no servidor" });
   }
