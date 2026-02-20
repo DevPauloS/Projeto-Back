@@ -6,7 +6,7 @@ import cors from 'cors'
 
 
 const corsOptions = {
-  origin: 'https://paulosf.netlify.app'
+  origin: ['https://paulosf.netlify.app', 'http://localhost:5173']
 };
 
 const app = express();
