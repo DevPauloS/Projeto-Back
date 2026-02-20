@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 router.get("/listar-usuarios", async (req, res) => {
   try {
     const user = await prisma.user.findMany();
-    const userFiltrado = user.map(e => e.name);
+    const userFiltrado = JSON.stringify(user.map(e => e.name));
 
     res
       .status(200)
