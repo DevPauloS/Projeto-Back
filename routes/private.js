@@ -7,11 +7,9 @@ const prisma = new PrismaClient();
 router.get("/listar-usuarios", async (req, res) => {
   try {
     const user = await prisma.user.findMany();
-    const userFiltrado = JSON.stringify(user.map(e => e.name));
-
     res
       .status(200)
-      .json({ message: "Usuários listados com sucesso", userFiltrado});
+      .json({ message: "Usuários listados com sucesso", user});
   } catch (error) {
     res.status(500).json({ message: "Falha no servidor" });
   }
