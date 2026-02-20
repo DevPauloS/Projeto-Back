@@ -15,24 +15,4 @@ router.get("/listar-usuarios", async (req, res) => {
   }
 });
 
-router.post("/listar-usuario", async (req, res) => {
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email: req.user.email
-      },
-      select: {
-        id: true,
-        name: true,
-        email: true
-      }
-    });
-    res
-      .status(200)
-      .json({ message: "Usuário listado com sucesso", user: user});
-  } catch (error) {
-    res.status(500).json({ message: "Falha no servidor" });
-  }
-});
-
 export default router;
